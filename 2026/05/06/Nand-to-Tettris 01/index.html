@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"localhost","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="布尔逻辑（Boolean Logic）本章目标是用一个NAND门，通过逻辑组合，推导出其他所有的基本门，理解选择器（Mux&#x2F;Demux）。 此单元要注意，我们使用的是专门为Nand2Tetris这门课程和项目定制的一种教学用硬件描述语言。只保留了最核心的声明接口 (IN&#x2F;OUT) 和 连接零件 (PARTS)。 逻辑门NAND（与非门）在开始之前，首先要知道前文提到的NAND门">
+    <meta name="description" content="Boolean Logic和Multiplexor">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nand to Tettris 01">
 <meta property="og:url" content="http://localhost:4000/2026/05/06/Nand-to-Tettris%2001/index.html">
 <meta property="og:site_name" content="洛书的小网站">
-<meta property="og:description" content="布尔逻辑（Boolean Logic）本章目标是用一个NAND门，通过逻辑组合，推导出其他所有的基本门，理解选择器（Mux&#x2F;Demux）。 此单元要注意，我们使用的是专门为Nand2Tetris这门课程和项目定制的一种教学用硬件描述语言。只保留了最核心的声明接口 (IN&#x2F;OUT) 和 连接零件 (PARTS)。 逻辑门NAND（与非门）在开始之前，首先要知道前文提到的NAND门">
+<meta property="og:description" content="Boolean Logic和Multiplexor">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-05-06T02:40:49.000Z">
-<meta property="article:modified_time" content="2026-05-06T13:31:46.731Z">
+<meta property="article:modified_time" content="2026-05-06T13:45:04.391Z">
 <meta property="article:author" content="洛书">
 <meta name="twitter:card" content="summary">
 
@@ -122,7 +122,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E9%80%BB%E8%BE%91%EF%BC%88Boolean-Logic%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">布尔逻辑（Boolean Logic）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E9%97%A8"><span class="nav-number">1.1.</span> <span class="nav-text">逻辑门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NAND%EF%BC%88%E4%B8%8E%E9%9D%9E%E9%97%A8%EF%BC%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">NAND（与非门）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E9%97%A8%EF%BC%88NOT%EF%BC%89"><span class="nav-number">1.1.2.</span> <span class="nav-text">非门（NOT）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8E%E9%97%A8%EF%BC%88AND%EF%BC%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">与门（AND）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OR-%E6%88%96%E9%97%A8"><span class="nav-number">1.1.4.</span> <span class="nav-text">OR(或门)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XOR%EF%BC%88%E6%88%96%E4%B8%8E%E9%97%A8%EF%BC%89"><span class="nav-number">1.1.5.</span> <span class="nav-text">XOR（或与门）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%99%A8%EF%BC%88Multiplexor%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">多路复用器（Multiplexor）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux-Multiplexor%EF%BC%8C%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%99%A8"><span class="nav-number">1.2.1.</span> <span class="nav-text">Mux(Multiplexor，多路复用器)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMux%EF%BC%88Demultiplexor%EF%BC%8C%E5%A4%9A%E8%B7%AF%E5%88%86%E9%85%8D%E5%99%A8%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">DMux（Demultiplexor，多路分配器）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16%E4%BD%8D%E9%80%BB%E8%BE%91%E9%97%A8"><span class="nav-number">1.3.</span> <span class="nav-text">16位逻辑门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Not16"><span class="nav-number">1.3.1.</span> <span class="nav-text">Not16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AND16"><span class="nav-number">1.3.2.</span> <span class="nav-text">AND16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OR16"><span class="nav-number">1.3.3.</span> <span class="nav-text">OR16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OR8way"><span class="nav-number">1.3.4.</span> <span class="nav-text">OR8way</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">1.4.</span> <span class="nav-text">多路选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux16"><span class="nav-number">1.4.1.</span> <span class="nav-text">Mux16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux-way16-4%E8%B7%AF%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">1.4.2.</span> <span class="nav-text">Mux@way16(4路选择器)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux8Way16"><span class="nav-number">1.4.3.</span> <span class="nav-text">Mux8Way16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMux4Way"><span class="nav-number">1.4.4.</span> <span class="nav-text">DMux4Way</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMux8Way"><span class="nav-number">1.4.5.</span> <span class="nav-text">DMux8Way</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%BE%E5%A3%B0"><span class="nav-number">1.5.</span> <span class="nav-text">尾声</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E9%80%BB%E8%BE%91%EF%BC%88Boolean-Logic%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">布尔逻辑（Boolean Logic）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E9%97%A8"><span class="nav-number">2.</span> <span class="nav-text">逻辑门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NAND%EF%BC%88%E4%B8%8E%E9%9D%9E%E9%97%A8%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">NAND（与非门）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E9%97%A8%EF%BC%88NOT%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">非门（NOT）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8E%E9%97%A8%EF%BC%88AND%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">与门（AND）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OR-%E6%88%96%E9%97%A8"><span class="nav-number">2.4.</span> <span class="nav-text">OR(或门)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XOR%EF%BC%88%E6%88%96%E4%B8%8E%E9%97%A8%EF%BC%89"><span class="nav-number">2.5.</span> <span class="nav-text">XOR（或与门）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%99%A8%EF%BC%88Multiplexor%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">多路复用器（Multiplexor）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux-Multiplexor%EF%BC%8C%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%99%A8"><span class="nav-number">3.1.</span> <span class="nav-text">Mux(Multiplexor，多路复用器)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMux%EF%BC%88Demultiplexor%EF%BC%8C%E5%A4%9A%E8%B7%AF%E5%88%86%E9%85%8D%E5%99%A8%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">DMux（Demultiplexor，多路分配器）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16%E4%BD%8D%E9%80%BB%E8%BE%91%E9%97%A8"><span class="nav-number">4.</span> <span class="nav-text">16位逻辑门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Not16"><span class="nav-number">4.1.</span> <span class="nav-text">Not16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AND16"><span class="nav-number">4.2.</span> <span class="nav-text">AND16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OR16"><span class="nav-number">4.3.</span> <span class="nav-text">OR16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OR8way"><span class="nav-number">4.4.</span> <span class="nav-text">OR8way</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">多路选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux16"><span class="nav-number">5.1.</span> <span class="nav-text">Mux16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux-way16-4%E8%B7%AF%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">5.2.</span> <span class="nav-text">Mux@way16(4路选择器)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux8Way16"><span class="nav-number">5.3.</span> <span class="nav-text">Mux8Way16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMux4Way"><span class="nav-number">5.4.</span> <span class="nav-text">DMux4Way</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMux8Way"><span class="nav-number">5.5.</span> <span class="nav-text">DMux8Way</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%BE%E5%A3%B0"><span class="nav-number">6.</span> <span class="nav-text">尾声</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -135,7 +135,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -181,7 +181,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="Nand to Tettris 01 | 洛书的小网站">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="Boolean Logic和Multiplexor">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -197,7 +197,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2026-05-06 10:40:49 / 修改时间：21:31:46" itemprop="dateCreated datePublished" datetime="2026-05-06T10:40:49+08:00">2026-05-06</time>
+      <time title="创建时间：2026-05-06 10:40:49 / 修改时间：21:45:04" itemprop="dateCreated datePublished" datetime="2026-05-06T10:40:49+08:00">2026-05-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -212,13 +212,16 @@
   
 </div>
 
+            <div class="post-description">Boolean Logic和Multiplexor</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="布尔逻辑（Boolean-Logic）"><a href="#布尔逻辑（Boolean-Logic）" class="headerlink" title="布尔逻辑（Boolean Logic）"></a>布尔逻辑（Boolean Logic）</h1><p>本章目标是用一个NAND门，通过逻辑组合，推导出其他所有的基本门，理解选择器（Mux&#x2F;Demux）。</p>
+    <div class="post-body" itemprop="articleBody"><span id="more"></span>
+
+<h2 id="布尔逻辑（Boolean-Logic）"><a href="#布尔逻辑（Boolean-Logic）" class="headerlink" title="布尔逻辑（Boolean Logic）"></a>布尔逻辑（Boolean Logic）</h2><p>本章目标是用一个NAND门，通过逻辑组合，推导出其他所有的基本门，理解选择器（Mux&#x2F;Demux）。</p>
 <p>此单元要注意，我们使用的是专门为Nand2Tetris这门课程和项目定制的一种教学用硬件描述语言。只保留了最核心的声明接口 (IN&#x2F;OUT) 和 连接零件 (PARTS)。</p>
 <h2 id="逻辑门"><a href="#逻辑门" class="headerlink" title="逻辑门"></a>逻辑门</h2><h3 id="NAND（与非门）"><a href="#NAND（与非门）" class="headerlink" title="NAND（与非门）"></a>NAND（与非门）</h3><p>在开始之前，首先要知道前文提到的NAND门到底是做什么的。简单来说，NAND门是数字电路里的”全能选手”，他是逻辑门（gate）中的一种，当所有的输入（input）信号都为”高”（1）时，输入才为“低”（0）；在任何其他情况下，输出（output）都是“高”（1）。</p>
 <p>为什么与非门这么重要？因为它被称为通用逻辑门（Universal Gate<br>）,只需要用NAND门就可以组合出任何其他的逻辑门。</p>
@@ -335,6 +338,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2026/05/06/Nand-to-Tettris%2002/" rel="next" title="">
+                   <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
