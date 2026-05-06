@@ -20,24 +20,26 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"localhost","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="浅薄之人总爱议论别人的无知，越是知识丰富的人，却往往善于发现自己的无知">
-<meta property="og:type" content="website">
-<meta property="og:title" content="洛书的小网站">
-<meta property="og:url" content="http://localhost:4000/index.html">
+    <meta name="description" content="布尔逻辑（Boolean Logic）本章目标是用一个NAND门，通过逻辑组合，推导出其他所有的基本门，理解选择器（Mux&#x2F;Demux）。 此单元要注意，我们使用的是专门为Nand2Tetris这门课程和项目定制的一种教学用硬件描述语言。只保留了最核心的声明接口 (IN&#x2F;OUT) 和 连接零件 (PARTS)。 逻辑门NAND（与非门）在开始之前，首先要知道前文提到的NAND门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nand to Tettris 01">
+<meta property="og:url" content="http://localhost:4000/2026/05/06/Nand-to-Tettris%2001/index.html">
 <meta property="og:site_name" content="洛书的小网站">
-<meta property="og:description" content="浅薄之人总爱议论别人的无知，越是知识丰富的人，却往往善于发现自己的无知">
+<meta property="og:description" content="布尔逻辑（Boolean Logic）本章目标是用一个NAND门，通过逻辑组合，推导出其他所有的基本门，理解选择器（Mux&#x2F;Demux）。 此单元要注意，我们使用的是专门为Nand2Tetris这门课程和项目定制的一种教学用硬件描述语言。只保留了最核心的声明接口 (IN&#x2F;OUT) 和 连接零件 (PARTS)。 逻辑门NAND（与非门）在开始之前，首先要知道前文提到的NAND门">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-05-06T02:40:49.000Z">
+<meta property="article:modified_time" content="2026-05-06T13:18:02.681Z">
 <meta property="article:author" content="洛书">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://localhost:4000/">
+<link rel="canonical" href="http://localhost:4000/2026/05/06/Nand-to-Tettris%2001/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://localhost:4000/2026/05/06/Nand-to-Tettris%2001/","path":"2026/05/06/Nand-to-Tettris 01/","title":"Nand to Tettris 01"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>洛书的小网站</title>
+<title>Nand to Tettris 01 | 洛书的小网站</title>
   
 
 
@@ -84,7 +86,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">洛书的小网站</h1>
+      <p class="site-title">洛书的小网站</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">欲征服世界前，先征服自己</p>
@@ -107,7 +109,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -120,6 +122,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E9%80%BB%E8%BE%91%EF%BC%88Boolean-Logic%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">布尔逻辑（Boolean Logic）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E9%97%A8"><span class="nav-number">1.1.</span> <span class="nav-text">逻辑门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NAND%EF%BC%88%E4%B8%8E%E9%9D%9E%E9%97%A8%EF%BC%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">NAND（与非门）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E9%97%A8%EF%BC%88NOT%EF%BC%89"><span class="nav-number">1.1.2.</span> <span class="nav-text">非门（NOT）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8E%E9%97%A8%EF%BC%88AND%EF%BC%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">与门（AND）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OR-%E6%88%96%E9%97%A8"><span class="nav-number">1.1.4.</span> <span class="nav-text">OR(或门)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XOR%EF%BC%88%E6%88%96%E4%B8%8E%E9%97%A8%EF%BC%89"><span class="nav-number">1.1.5.</span> <span class="nav-text">XOR（或与门）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%99%A8%EF%BC%88Multiplexor%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">多路复用器（Multiplexor）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux-Multiplexor%EF%BC%8C%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%99%A8"><span class="nav-number">1.2.1.</span> <span class="nav-text">Mux(Multiplexor，多路复用器)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMux%EF%BC%88Demultiplexor%EF%BC%8C%E5%A4%9A%E8%B7%AF%E5%88%86%E9%85%8D%E5%99%A8%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">DMux（Demultiplexor，多路分配器）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16%E4%BD%8D%E9%80%BB%E8%BE%91%E9%97%A8"><span class="nav-number">1.3.</span> <span class="nav-text">16位逻辑门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Not16"><span class="nav-number">1.3.1.</span> <span class="nav-text">Not16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AND16"><span class="nav-number">1.3.2.</span> <span class="nav-text">AND16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OR16"><span class="nav-number">1.3.3.</span> <span class="nav-text">OR16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OR8way"><span class="nav-number">1.3.4.</span> <span class="nav-text">OR8way</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">1.4.</span> <span class="nav-text">多路选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux16"><span class="nav-number">1.4.1.</span> <span class="nav-text">Mux16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux-way16-4%E8%B7%AF%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">1.4.2.</span> <span class="nav-text">Mux@way16(4路选择器)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux8Way16"><span class="nav-number">1.4.3.</span> <span class="nav-text">Mux8Way16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMux4Way"><span class="nav-number">1.4.4.</span> <span class="nav-text">DMux4Way</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMux8Way"><span class="nav-number">1.4.5.</span> <span class="nav-text">DMux8Way</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -153,16 +156,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://localhost:4000/2026/05/06/Nand-to-Tettris%2001/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -176,13 +180,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 洛书的小网站">
+      <meta itemprop="name" content="Nand to Tettris 01 | 洛书的小网站">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/05/06/Nand-to-Tettris%2001/" class="post-title-link" itemprop="url">Nand to Tettris 01</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Nand to Tettris 01
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -214,8 +218,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="布尔逻辑（Boolean-Logic）"><a href="#布尔逻辑（Boolean-Logic）" class="headerlink" title="布尔逻辑（Boolean Logic）"></a>布尔逻辑（Boolean Logic）</h1><p>本章目标是用一个NAND门，通过逻辑组合，推导出其他所有的基本门，理解选择器（Mux&#x2F;Demux）。</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="布尔逻辑（Boolean-Logic）"><a href="#布尔逻辑（Boolean-Logic）" class="headerlink" title="布尔逻辑（Boolean Logic）"></a>布尔逻辑（Boolean Logic）</h1><p>本章目标是用一个NAND门，通过逻辑组合，推导出其他所有的基本门，理解选择器（Mux&#x2F;Demux）。</p>
 <p>此单元要注意，我们使用的是专门为Nand2Tetris这门课程和项目定制的一种教学用硬件描述语言。只保留了最核心的声明接口 (IN&#x2F;OUT) 和 连接零件 (PARTS)。</p>
 <h2 id="逻辑门"><a href="#逻辑门" class="headerlink" title="逻辑门"></a>逻辑门</h2><h3 id="NAND（与非门）"><a href="#NAND（与非门）" class="headerlink" title="NAND（与非门）"></a>NAND（与非门）</h3><p>在开始之前，首先要知道前文提到的NAND门到底是做什么的。简单来说，NAND门是数字电路里的”全能选手”，他是逻辑门（gate）中的一种，当所有的输入（input）信号都为”高”（1）时，输入才为“低”（0）；在任何其他情况下，输出（output）都是“高”（1）。</p>
 <p>为什么与非门这么重要？因为它被称为通用逻辑门（Universal Gate<br>）,只需要用NAND门就可以组合出任何其他的逻辑门。</p>
@@ -312,7 +315,6 @@
 <p><strong>编译过程：</strong><br>实现DMux8Way最好的方式是利用<strong>层级管理</strong>的例子：<br><strong>第一层：</strong><br>使用一个基础的 DMux，根据最高位 sel[2] 决定信号是发往“前四个（a-d）”还是“后四个（e-h）”。</p>
 <p><strong>第二层：</strong><br>接收到信号的前四个通道组，使用一个 DMux4Way，根据 sel[0..1] 决定具体的出口。<br>接收到信号的后四个通道组，使用另一个 DMux4Way，同样根据 sel[0..1] 决定具体的出口。</p>
 
-      
     </div>
 
     
@@ -320,98 +322,22 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/05/05/Nand-to-Tettris%2000/" rel="prev" title="Nand to Tettris 00">
+                  <i class="fa fa-angle-left"></i> Nand to Tettris 00
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/2026/05/05/Nand-to-Tettris%2000/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="洛书">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="洛书的小网站">
-      <meta itemprop="description" content="浅薄之人总爱议论别人的无知，越是知识丰富的人，却往往善于发现自己的无知">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 洛书的小网站">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/05/05/Nand-to-Tettris%2000/" class="post-title-link" itemprop="url">Nand to Tettris 00</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-05-05 18:47:29" itemprop="dateCreated datePublished" datetime="2026-05-05T18:47:29+08:00">2026-05-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-06 18:11:17" itemprop="dateModified" datetime="2026-05-06T18:11:17+08:00">2026-05-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h1><p>Nand to Tettris全称<strong>TheElements of Computing System</strong>，在学习中需要能理解<strong>电脑各零件的基本逻辑</strong>，<strong>代码如何转换成电流</strong>，<strong>内存地址和数据到底是怎么交换的</strong>，<strong>以及编译器是如何理解人的逻辑并且把它翻译成电脑能理解的0和1</strong>。</p>
-<p>这门课的起点就只有一个简单的与非门（Nand），最终目标是做出一个能够运行图形化游戏，拥有完整硬件框架，编译器和操作系统的<strong>现代计算机系统</strong>。</p>
-<h2 id="心路历程"><a href="#心路历程" class="headerlink" title="心路历程"></a>心路历程</h2><p>本人编程水平不太行，对电脑架构（Rechnerarchitekur）也是一知半解，本想抱着试一试的心态报了这门课，意外发现这门课反而让我有想学的动力，让我对电脑的底层逻辑又多了一些理解，特此记录不懂的难点和编程遇到的困难。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
