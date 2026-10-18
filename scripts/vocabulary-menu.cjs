@@ -4,4 +4,4 @@
 hexo.extend.filter.register('after_render:html', html => html.replace(
   '<a href="/vokabeln/" rel="section">',
   '<a href="/vokabeln/" rel="noopener" target="_blank">'
-));
+).replace(/((?:src|href)="\/(?:css|js)\/[^"?]+)(")/g, '$1?v=next-8.29-muse$2'));
