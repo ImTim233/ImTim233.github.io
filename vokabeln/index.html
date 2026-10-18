@@ -1,35 +1,262 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Vokabeln · 三语生词本</title>
-  <style>
-    *{box-sizing:border-box}body{margin:0;background:#f6f5f1;color:#25332e;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1080px;margin:auto;padding:40px 24px}a{color:#356b57}header{display:flex;justify-content:space-between;gap:20px;align-items:center}h1{font-size:clamp(32px,6vw,52px);letter-spacing:-2px;margin:30px 0 8px}p{line-height:1.7;color:#65726b}.label{font-size:12px;letter-spacing:2px;color:#65726b}label{display:block;margin:30px 0 10px}input{width:100%;padding:17px 20px;border:1px solid #c7d2ca;border-radius:12px;background:white;color:#25332e;font:inherit}input:focus{outline:3px solid #a5cbb8;outline-offset:2px}.table-wrap{overflow-x:auto;background:white;border:1px solid #dce2db;border-radius:14px}table{border-collapse:collapse;width:100%;text-align:left}th{font-size:13px;color:#52675a;background:#edf1eb}th,td{padding:18px 20px;border-bottom:1px solid #e7ebe5;vertical-align:top}td:first-child{font-weight:600}small{display:block;color:#65726b;font-weight:400;margin-top:8px}#empty{text-align:center;padding:50px 20px}footer{font-size:13px;margin-top:28px;color:#65726b}@media(max-width:600px){main{padding:24px 16px}th,td{padding:14px 12px}header{align-items:flex-start}}
-  </style>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=next-8.29-muse">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"localhost","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js?v=next-8.29-muse" defer></script>
+
+    <meta name="description" content=".vocab label{display:block;margin:12px 0 4px}.vocab input{box-sizing:border-box;width:100%;padding:10px 12px;background:var(--content-bg-color);color:var(--text-color);border:1px solid #888;border-ra">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vokabeln · 三语生词本">
+<meta property="og:url" content="http://localhost:4000/vokabeln/index.html">
+<meta property="og:site_name" content="洛书的小网站">
+<meta property="og:description" content=".vocab label{display:block;margin:12px 0 4px}.vocab input{box-sizing:border-box;width:100%;padding:10px 12px;background:var(--content-bg-color);color:var(--text-color);border:1px solid #888;border-ra">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-10-18T11:15:55.222Z">
+<meta property="article:modified_time" content="2026-10-18T11:15:55.222Z">
+<meta property="article:author" content="洛书">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://localhost:4000/vokabeln/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"http://localhost:4000/vokabeln/index.html","path":"vokabeln/index.html","title":"Vokabeln · 三语生词本"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Vokabeln · 三语生词本 | 洛书的小网站
+</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js?v=next-8.29-muse" defer></script><script src="/js/motion.js?v=next-8.29-muse" defer></script><script src="/js/sidebar.js?v=next-8.29-muse" defer></script><script src="/js/next-boot.js?v=next-8.29-muse" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css?v=next-8.29-muse">
+  </noscript>
 </head>
-<body><main>
-  <header><span class="label">SPANISCH / 学习笔记</span><a href="/">返回博客</a></header>
-  <h1>Vokabeln</h1>
-  <p>西班牙语 · Deutsch · 中文<br>把新遇到的词放在这里，慢慢积累。</p>
-  <label for="search">搜索单词、释义、课次或例句</label>
-  <input id="search" type="search" placeholder="输入西语、德语或中文…" autocomplete="off" aria-controls="words">
-  <p id="count" role="status" aria-live="polite">正在读取生词…</p>
-  <div class="table-wrap"><table id="words"><thead><tr><th scope="col">Español</th><th scope="col">Deutsch</th><th scope="col">中文</th></tr></thead><tbody id="rows"></tbody></table><div id="empty" hidden></div></div>
-  <footer>支持忽略大小写和重音符号搜索。生词按西班牙语字母排序。</footer>
-</main>
-<script>
-  const input=document.getElementById('search'),rows=document.getElementById('rows'),empty=document.getElementById('empty'),count=document.getElementById('count');
-  let words=[];
-  const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase().replace(/ß/g,'ss');
-  function render(){
-    const terms=normalize(input.value).trim().split(/\s+/).filter(Boolean);
-    const matches=words.filter(word=>terms.every(term=>normalize([word.es,word.de,word.zh,word.lesson,word.example].join(' ')).includes(term)));
-    rows.replaceChildren();
-    for(const word of matches){const row=document.createElement('tr');for(const key of ['es','de','zh']){const cell=document.createElement('td');cell.textContent=word[key]||'—';if(key==='es'){for(const detail of [word.lesson,word.example]){if(detail){const note=document.createElement('small');note.textContent=detail;cell.append(note)}}}row.append(cell)}rows.append(row)}
-    count.textContent=terms.length?`找到 ${matches.length} / ${words.length} 个词条`:`共 ${words.length} 个词条`;
-    empty.hidden=matches.length>0;empty.textContent=words.length?'没有找到匹配的词条，试试其他拼写。':'生词本还是空的，留给你的第一个词。';
-  }
-  input.addEventListener('input',render);
-  fetch('./words.json').then(response=>{if(!response.ok)throw new Error('load');return response.json()}).then(data=>{if(!Array.isArray(data))throw new Error('format');words=data.sort((a,b)=>String(a.es||'').localeCompare(String(b.es||''),'es'));render()}).catch(()=>{count.textContent='暂时无法读取生词';empty.hidden=false;empty.textContent='请刷新重试。'});
-</script></body></html>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">洛书的小网站</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">欲征服世界前，先征服自己</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-生词本"><a href="/vokabeln/" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>生词本</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">洛书</p>
+  <div class="site-description" itemprop="description">浅薄之人总爱议论别人的无知，越是知识丰富的人，却往往善于发现自己的无知</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">Vokabeln · 三语生词本
+</h1>
+
+<div class="post-meta-container">
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <style>
+.vocab label{display:block;margin:12px 0 4px}.vocab input{box-sizing:border-box;width:100%;padding:10px 12px;background:var(--content-bg-color);color:var(--text-color);border:1px solid #888;border-radius:3px;font:inherit}.vocab input:focus{outline:2px solid #888;outline-offset:2px}.vocab-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.vocab .actions{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}.vocab button,.vocab .file-label{cursor:pointer;font:inherit;background:var(--content-bg-color);color:var(--text-color);border:1px solid #888;border-radius:3px;padding:6px 14px}.vocab .file-label{margin:0}.vocab .hint{font-size:13px;color:#888}.vocab .table-wrap{overflow:auto}.vocab th,.vocab td{min-width:110px;vertical-align:top}.vocab small{display:block;font-weight:normal}.vocab #empty{text-align:center;padding:25px}.vocab .delete{font-size:13px;padding:3px 9px}.vocab summary{cursor:pointer}.vocab #message{min-height:1.6em}.vocab [hidden]{display:none!important}@media(max-width:650px){.vocab-grid{grid-template-columns:1fr;gap:0}}
+</style>
+<section class="vocab" aria-label="三语生词本">
+<p>Español · Deutsch · 中文</p>
+<details open><summary>添加生词</summary>
+<form id="add-word">
+<div class="vocab-grid">
+<div><label for="es">西班牙语</label><input id="es" name="es" required maxlength="200" placeholder="例如：el árbol"></div>
+<div><label for="de">德语</label><input id="de" name="de" required maxlength="200" placeholder="例如：der Baum"></div>
+<div><label for="zh">中文</label><input id="zh" name="zh" required maxlength="200" placeholder="例如：树"></div>
+</div>
+<label for="lesson">课次（选填）</label><input id="lesson" name="lesson" maxlength="200" placeholder="例如：spanisch 00">
+<label for="example">例句（选填）</label><input id="example" name="example" maxlength="1000" placeholder="写一句帮助记忆的话">
+<div class="actions"><button type="submit">添加生词</button></div>
+</form></details>
+<p class="hint">新增词条保存在当前浏览器，不会自动同步到其他设备。建议定期导出备份；换设备时可导入。</p>
+<div class="actions"><button id="export" type="button">导出备份</button><label class="file-label" for="import">导入备份</label><input id="import" type="file" accept=".json,application/json" hidden></div>
+<p id="message" role="status" aria-live="polite"></p>
+<label for="search">查找生词</label><input id="search" type="search" placeholder="输入西语、德语、中文、课次或例句…" aria-controls="words">
+<p id="count" role="status" aria-live="polite">正在读取生词…</p>
+<div class="table-wrap"><table id="words"><thead><tr><th>Español</th><th>Deutsch</th><th>中文</th><th>操作</th></tr></thead><tbody id="rows"></tbody></table><div id="empty" hidden></div></div>
+<p class="hint">按西语字母排序，搜索忽略大小写和重音符号。导入会合并并跳过重复词条。</p>
+</section>
+<script src="/vokabeln/app.js?v=2" defer></script>
+
+      </div>
+      
+      
+      
+    </div>
+
+    
+    
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">洛书</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
