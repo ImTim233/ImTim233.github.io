@@ -1,116 +1,22 @@
 (() => {
-  'use strict';
-  const $ = id => document.getElementById(id);
-  const storageKey = 'loshu-vokabeln-v1';
-  const fields = ['es', 'de', 'zh', 'lesson', 'example'];
-  let local = [], published = [], undo = null, editing = null;
-  const normalize = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase().replace(/ß/g, 'ss');
-  const identity = word => JSON.stringify(fields.map(key => String(word[key] || '').trim()));
-  function validate(data) {
-    if (!Array.isArray(data) || data.length > 10000) throw new Error('备份必须是词条数组，最多 10000 条。');
-    return data.map(word => {
-      if (!word || typeof word !== 'object' || ['es', 'de', 'zh'].some(key => typeof word[key] !== 'string' || !word[key].trim())) throw new Error('每条生词都需要西班牙语、德语和中文。');
-      const clean = {};
-      for (const key of fields) {
-        if (word[key] != null && typeof word[key] !== 'string') throw new Error('词条字段必须是文字。');
-        clean[key] = (word[key] || '').trim();
-        if (clean[key].length > (key === 'example' ? 1000 : 200)) throw new Error('词条内容过长。');
-      }
-      return clean;
-    });
-  }
-  function message(text) { $('message').textContent = text; }
-  function resetEditor() {
-    editing = null;
-    $('add-word').reset();
-    $('save-word').textContent = '添加生词';
-    $('editor-title').textContent = '添加生词';
-    $('cancel-edit').hidden = true;
-  }
-  function save(next) {
-    if (next.length > 10000) { message('最多保存 10000 条生词，请先导出备份并整理词库。'); return false; }
-    try { localStorage.setItem(storageKey, JSON.stringify(next)); local = next; render(); return true; }
-    catch { message('无法保存到浏览器，请检查存储设置或空间。输入内容已保留。'); return false; }
-  }
-  function allWords() {
-    const unique = new Map();
-    for (const word of published) unique.set(identity(word), { ...word, source: 'published' });
-    for (const word of local) if (!unique.has(identity(word))) unique.set(identity(word), { ...word, source: 'local' });
-    return [...unique.values()].sort((a, b) => a.es.localeCompare(b.es, 'es'));
-  }
-  function render() {
-    const words = allWords(), terms = normalize($('search').value).trim().split(/\s+/).filter(Boolean);
-    const matches = words.filter(word => terms.every(term => normalize(fields.map(key => word[key]).join(' ')).includes(term)));
-    $('rows').replaceChildren();
-    for (const word of matches) {
-      const row = document.createElement('tr');
-      for (const key of ['es', 'de', 'zh']) {
-        const cell = document.createElement('td'); cell.textContent = word[key];
-        if (key === 'es') for (const detail of [word.lesson, word.example]) if (detail) { const note = document.createElement('small'); note.textContent = detail; cell.append(note); }
-        row.append(cell);
-      }
-      const action = document.createElement('td');
-      if (word.source === 'local') {
-        const edit = document.createElement('button'); edit.type = 'button'; edit.className = 'delete'; edit.textContent = '修改'; edit.setAttribute('aria-label', `修改 ${word.es}`);
-        edit.addEventListener('click', () => {
-          editing = identity(word);
-          for (const key of fields) $(key).value = word[key] || '';
-          $('word-editor').open = true;
-          $('save-word').textContent = '保存修改';
-          $('editor-title').textContent = '修改生词';
-          $('cancel-edit').hidden = false;
-          message(`正在修改 ${word.es}。`); $('es').focus();
-        });
-        action.append(edit, ' ');
-        const button = document.createElement('button'); button.type = 'button'; button.className = 'delete'; button.textContent = '删除'; button.setAttribute('aria-label', `删除 ${word.es}`);
-        button.addEventListener('click', () => {
-          const previous = [...local];
-          if (save(local.filter(item => identity(item) !== identity(word)))) {
-            if (editing === identity(word)) resetEditor();
-            undo = previous; message(`已删除 ${word.es}。`);
-            const restore = document.createElement('button'); restore.type = 'button'; restore.textContent = '撤销';
-            restore.addEventListener('click', () => { if (undo && save(undo)) { undo = null; message('已恢复词条。'); } });
-            $('message').append(' ', restore);
-          }
-        }); action.append(button);
-      } else action.textContent = '已发布';
-      row.append(action); $('rows').append(row);
-    }
-    $('count').textContent = terms.length ? `找到 ${matches.length} / ${words.length} 个词条` : `共 ${words.length} 个词条`;
-    $('empty').hidden = matches.length > 0;
-    $('empty').textContent = words.length ? '没有找到匹配的词条。' : '还没有生词，在上方添加第一个吧。';
-  }
-  try { const stored = localStorage.getItem(storageKey); local = stored ? validate(JSON.parse(stored)) : []; }
-  catch { message('浏览器中的备份暂时无法读取，原有存储未被覆盖。请先导出原始备份后再添加。'); $('add-word').querySelector('button').disabled = true; $('import').disabled = true; }
-  $('add-word').addEventListener('submit', event => {
-    event.preventDefault();
-    let word;
-    try { word = validate([Object.fromEntries(fields.map(key => [key, $(key).value]))])[0]; }
-    catch (error) { message(error.message); return; }
-    if (editing && !local.some(item => identity(item) === editing)) { message('原词条已不存在，请取消修改后重新添加。'); return; }
-    if (allWords().some(item => identity(item) === identity(word) && identity(item) !== editing)) { message('这个词条已经在生词本里了，请修改内容后再保存。'); return; }
-    const wasEditing = editing !== null;
-    const next = wasEditing ? local.map(item => identity(item) === editing ? word : item) : [...local, word];
-    if (save(next)) { resetEditor(); $('search').value = ''; render(); message(`已${wasEditing ? '修改' : '添加'} ${word.es}，保存在此浏览器。`); $('es').focus(); }
-  });
-  $('cancel-edit').addEventListener('click', () => { resetEditor(); message('已取消修改，原词条保持不变。'); });
-  $('search').addEventListener('input', render);
-  $('export').addEventListener('click', () => {
-    const text = $('add-word').querySelector('button').disabled ? (localStorage.getItem(storageKey) || '[]') : JSON.stringify(allWords().map(word => Object.fromEntries(fields.map(key => [key, word[key] || '']))), null, 2);
-    const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
-    const link = document.createElement('a'); link.href = url; link.download = `vokabeln-${new Date().toISOString().slice(0, 10)}.json`; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
-    message('已导出备份，请保管好下载的 JSON 文件。');
-  });
-  $('import').addEventListener('change', async event => {
-    const file = event.target.files[0]; if (!file) return;
-    try {
-      if (file.size > 10000000) throw new Error('备份文件不能超过 10 MB。');
-      const incoming = validate(JSON.parse(await file.text())), seen = new Set(allWords().map(identity));
-      const additions = incoming.filter(word => { const id = identity(word); if (seen.has(id)) return false; seen.add(id); return true; });
-      if (save([...local, ...additions])) message(`已导入 ${additions.length} 条，跳过 ${incoming.length - additions.length} 条重复词条。`);
-    } catch (error) { message(`导入失败：${error instanceof SyntaxError ? '文件不是有效的 JSON。' : error.message}`); }
-    event.target.value = '';
-  });
-  render();
-  fetch('/vokabeln/words.json').then(response => { if (!response.ok) throw new Error(); return response.json(); }).then(data => { published = validate(data); render(); }).catch(() => message('已发布词库暂时无法加载；本地添加与搜索仍可使用。'));
+'use strict';
+const $=id=>document.getElementById(id),key='loshu-vokabeln-v1',fields=['es','de','zh','lesson','example'];
+let state={words:[],overrides:[],hidden:[]},published=[],editing=null,locked=false;
+const identity=w=>JSON.stringify(fields.map(k=>String(w[k]||'').trim()));
+const normalize=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/ß/g,'ss');
+function validate(data){if(!Array.isArray(data)||data.length>10000)throw Error('词条数组最多 10000 条。');return data.map(w=>{if(!w||['es','de','zh'].some(k=>typeof w[k]!=='string'||!w[k].trim()))throw Error('每条需要西语、德语和中文。');let clean={};for(const k of fields){if(w[k]!=null&&typeof w[k]!=='string')throw Error('词条字段必须是文字。');clean[k]=(w[k]||'').trim();if(clean[k].length>(k==='example'?1000:200))throw Error('词条内容过长。');}return clean;});}
+function readState(data){if(Array.isArray(data))return {words:validate(data),overrides:[],hidden:[]};if(!data||!Array.isArray(data.overrides)||!Array.isArray(data.hidden)||data.overrides.length>10000||data.hidden.length>10000)throw Error('备份格式无效。');return {words:validate(data.words),overrides:data.overrides.map(o=>{if(typeof o.id!=='string')throw Error('修改记录无效。');return {id:o.id,word:validate([o.word])[0]};}),hidden:data.hidden.map(id=>{if(typeof id!=='string')throw Error('删除记录无效。');return id;})};}
+function message(text){$('message').textContent=text;}
+function save(next){if(locked){message('本地数据暂时无法读取，未覆盖原记录。请在数据管理中导出原始备份。');return false;}try{const checked=readState(next);localStorage.setItem(key,JSON.stringify(checked));state=checked;render();return true;}catch(e){message('保存失败：'+e.message);return false;}}
+function allWords(){const result=[],seen=new Set();for(const original of published){const id=identity(original);if(state.hidden.includes(id))continue;const override=state.overrides.find(o=>o.id===id);const w=override?override.word:original;result.push({...w,source:'published',id,changed:!!override});seen.add(identity(w));}for(const w of state.words){if(!seen.has(identity(w))){result.push({...w,source:'local',id:identity(w)});seen.add(identity(w));}}return result.sort((a,b)=>a.es.localeCompare(b.es,'es'));}
+function resetEditor(){editing=null;$('add-word').reset();$('save-word').textContent='添加生词';$('editor-title').textContent='添加生词';$('cancel-edit').hidden=true;}
+function edit(word){editing={id:word.id,source:word.source};for(const k of fields)$(k).value=word[k]||'';$('word-editor').open=true;$('save-word').textContent='保存修改';$('editor-title').textContent='修改生词';$('cancel-edit').hidden=false;message('正在修改 '+word.es);$('es').focus();}
+function remove(word){const previous=JSON.parse(JSON.stringify(state));let next=JSON.parse(JSON.stringify(state));if(word.source==='published')next.hidden.push(word.id);else next.words=next.words.filter(w=>identity(w)!==word.id);if(save(next)){if(editing&&editing.id===word.id)resetEditor();message('已在此浏览器删除 '+word.es+'。');const undo=document.createElement('button');undo.textContent='撤销';undo.type='button';undo.addEventListener('click',()=>{if(save(previous))message('已恢复。');});$('message').append(' ',undo);}}
+function render(){const words=allWords(),terms=normalize($('search').value).trim().split(/\s+/).filter(Boolean),lesson=$('lesson-filter').value;const matches=words.filter(w=>(!lesson||w.lesson===lesson)&&terms.every(t=>normalize(fields.map(k=>w[k]).join(' ')).includes(t)));$('rows').replaceChildren();for(const w of matches){const row=document.createElement('tr');for(const k of ['es','de','zh']){const td=document.createElement('td');td.setAttribute('data-label',k==='es'?'Español':k==='de'?'Deutsch':'中文');const text=document.createElement('span');text.textContent=w[k];td.append(text);if(k==='es'){if(w.lesson){const badge=document.createElement('small');badge.className='lesson-badge';badge.textContent=w.lesson.replace(/^spanisch\s*/i,'Lektion ');td.append(badge);}if(w.example){const note=document.createElement('small');note.className='example';note.textContent=w.example;td.append(note);}}row.append(td);}const actions=document.createElement('td');actions.className='word-actions';for(const [title,fn]of [['修改',()=>edit(w)],['删除',()=>remove(w)]]){const b=document.createElement('button');b.type='button';b.textContent=title;b.setAttribute('aria-label',title+' '+w.es);b.disabled=locked;b.addEventListener('click',fn);actions.append(b);}row.append(actions);$('rows').append(row);}$('count').textContent=`${matches.length} 个词条`;$('total').textContent=`词库共 ${words.length} 个`;$('empty').hidden=matches.length>0;$('empty').textContent=words.length?'没有匹配的词条，换个关键词试试。':'还没有生词，点击「添加生词」开始。';}
+try{const raw=localStorage.getItem(key);if(raw)state=readState(JSON.parse(raw));}catch{locked=true;message('本地记录读取失败，原数据已保留。请先在数据管理中导出。');$('save-word').disabled=true;$('import').disabled=true;}
+$('add-word').addEventListener('submit',e=>{e.preventDefault();try{const word=validate([Object.fromEntries(fields.map(k=>[k,$(k).value]))])[0];if(allWords().some(w=>identity(w)===identity(word)&&(!editing||w.id!==editing.id||w.source!==editing.source))){message('这个词条已存在。');return;}let next=JSON.parse(JSON.stringify(state));if(editing){if(editing.source==='published'){next.overrides=next.overrides.filter(o=>o.id!==editing.id);next.overrides.push({id:editing.id,word});}else{if(!next.words.some(w=>identity(w)===editing.id))throw Error('原词条不存在，请取消后重新添加。');next.words=next.words.map(w=>identity(w)===editing.id?word:w);}}else next.words.push(word);if(save(next)){const changed=!!editing;resetEditor();$('search').value='';$('lesson-filter').value='';render();message(`已${changed?'修改':'添加'} ${word.es}，保存在此浏览器。`);}}catch(err){message(err.message);}});
+$('cancel-edit').addEventListener('click',()=>{resetEditor();message('已取消修改。');});$('search').addEventListener('input',render);$('lesson-filter').addEventListener('change',render);
+$('export').addEventListener('click',()=>{try{const text=locked?localStorage.getItem(key):JSON.stringify(state,null,2),url=URL.createObjectURL(new Blob([text||'[]'],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='vokabeln-personal-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);message('个人修改已导出。');}catch{message('无法读取浏览器存储。');}});
+$('import').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>10000000)throw Error('文件不能超过 10 MB。');const incoming=readState(JSON.parse(await file.text())),next=JSON.parse(JSON.stringify(state)),seen=new Set(allWords().map(identity));for(const w of incoming.words)if(!seen.has(identity(w))){next.words.push(w);seen.add(identity(w));}for(const o of incoming.overrides){next.overrides=next.overrides.filter(v=>v.id!==o.id);next.overrides.push(o);}next.hidden=[...new Set([...next.hidden,...incoming.hidden])];if(save(next))message('已合并个人词条与修改记录。');}catch(err){message('导入失败：'+err.message);}e.target.value='';});
+render();fetch('/vokabeln/words.json?v=units-00-01').then(r=>{if(!r.ok)throw Error();return r.json();}).then(data=>{published=validate(data);render();}).catch(()=>message('教材词库暂时未加载，请刷新重试。本地记录仍可使用。'));
 })();
