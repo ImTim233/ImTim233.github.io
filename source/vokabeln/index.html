@@ -8,7 +8,7 @@ comments: false
 </style>
 <section class="vocab" aria-label="三语生词本">
 <p>Español · Deutsch · 中文</p>
-<details open><summary>添加生词</summary>
+<details id="word-editor" open><summary id="editor-title">添加生词</summary>
 <form id="add-word">
 <div class="vocab-grid">
 <div><label for="es">西班牙语</label><input id="es" name="es" required maxlength="200" placeholder="例如：el árbol"></div>
@@ -17,7 +17,7 @@ comments: false
 </div>
 <label for="lesson">课次（选填）</label><input id="lesson" name="lesson" maxlength="200" placeholder="例如：spanisch 00">
 <label for="example">例句（选填）</label><input id="example" name="example" maxlength="1000" placeholder="写一句帮助记忆的话">
-<div class="actions"><button type="submit">添加生词</button></div>
+<div class="actions"><button id="save-word" type="submit">添加生词</button><button id="cancel-edit" type="button" hidden>取消修改</button></div>
 </form></details>
 <p class="hint">新增词条保存在当前浏览器，不会自动同步到其他设备。建议定期导出备份；换设备时可导入。</p>
 <div class="actions"><button id="export" type="button">导出备份</button><label class="file-label" for="import">导入备份</label><input id="import" type="file" accept=".json,application/json" hidden></div>
@@ -27,4 +27,4 @@ comments: false
 <div class="table-wrap"><table id="words"><thead><tr><th>Español</th><th>Deutsch</th><th>中文</th><th>操作</th></tr></thead><tbody id="rows"></tbody></table><div id="empty" hidden></div></div>
 <p class="hint">按西语字母排序，搜索忽略大小写和重音符号。导入会合并并跳过重复词条。</p>
 </section>
-<script src="/vokabeln/app.js?v=2" defer></script>
+<script src="/vokabeln/app.js?v=3" defer></script>
