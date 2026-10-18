@@ -1,1 +1,506 @@
-[]
+[
+  {
+    "es": "hola",
+    "de": "Hallo",
+    "zh": "你好",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "me llamo…",
+    "de": "ich heiße …",
+    "zh": "我叫……",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "y",
+    "de": "und",
+    "zh": "和；以及",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "tú",
+    "de": "du",
+    "zh": "你",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "¿cómo te llamas?",
+    "de": "wie heißt du?",
+    "zh": "你叫什么名字？",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "hablar",
+    "de": "sprechen",
+    "zh": "说话；讲（某种语言）",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "el español",
+    "de": "Spanisch",
+    "zh": "西班牙语",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "otro/-a",
+    "de": "anderer/-e/-es",
+    "zh": "另一个；其他的",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "la lengua",
+    "de": "die Sprache",
+    "zh": "语言",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "el saludo",
+    "de": "der Gruß",
+    "zh": "问候；招呼",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "¿cómo estás?",
+    "de": "wie geht es dir?",
+    "zh": "你好吗？",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "buenas tardes",
+    "de": "guten Abend / Tag",
+    "zh": "下午好；傍晚好",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "buenos días",
+    "de": "guten Tag",
+    "zh": "早上好；日安",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "buenas noches",
+    "de": "gute Nacht",
+    "zh": "晚上好；晚安",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "¿qué tal?",
+    "de": "wie geht’s?",
+    "zh": "怎么样？；你好吗？",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "la despedida",
+    "de": "der Abschied",
+    "zh": "告别",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "hasta pronto",
+    "de": "bis bald",
+    "zh": "回头见；不久再见",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "chau",
+    "de": "tschüs, servus",
+    "zh": "再见（口语）",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "hasta luego",
+    "de": "bis dann",
+    "zh": "待会儿见；回头见",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "adiós",
+    "de": "auf Wiedersehen",
+    "zh": "再见",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "Buenos Aires",
+    "de": "Buenos Aires",
+    "zh": "布宜诺斯艾利斯",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "Cuba",
+    "de": "Kuba",
+    "zh": "古巴",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "Honduras",
+    "de": "Honduras",
+    "zh": "洪都拉斯",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "Kenia",
+    "de": "Kenia",
+    "zh": "肯尼亚",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "España",
+    "de": "Spanien",
+    "zh": "西班牙",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "Quito",
+    "de": "Quito",
+    "zh": "基多",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "Uruguay",
+    "de": "Uruguay",
+    "zh": "乌拉圭",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "Venezuela",
+    "de": "Venezuela",
+    "zh": "委内瑞拉",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "Yalta",
+    "de": "Jalta",
+    "zh": "雅尔塔",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "Zaragoza",
+    "de": "Zaragoza",
+    "zh": "萨拉戈萨",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "ese/-a",
+    "de": "dieser/-e/-es",
+    "zh": "那个（阳性／阴性）；德语依语境可译 dieser/diese",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "yo",
+    "de": "ich",
+    "zh": "我",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "la silla",
+    "de": "der Stuhl",
+    "zh": "椅子",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "el proyector",
+    "de": "der Projektor",
+    "zh": "投影仪",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "la papelera",
+    "de": "der Papierkorb",
+    "zh": "废纸篓",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "la tableta",
+    "de": "das Tablet",
+    "zh": "平板电脑",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "el estuche",
+    "de": "das Federmäppchen, das Etui",
+    "zh": "笔袋；文具盒",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "la mesa",
+    "de": "der Tisch",
+    "zh": "桌子",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "el libro",
+    "de": "das Buch",
+    "zh": "书",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "el bolígrafo",
+    "de": "der Kugelschreiber",
+    "zh": "圆珠笔",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "el ordenador",
+    "de": "der Computer",
+    "zh": "电脑",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "el cuaderno",
+    "de": "das Heft",
+    "zh": "练习本；笔记本",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "la pizarra",
+    "de": "die Tafel",
+    "zh": "黑板；白板",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "la hoja de papel",
+    "de": "das Blatt Papier",
+    "zh": "一张纸",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "la mochila",
+    "de": "der Rucksack",
+    "zh": "背包；书包",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "¿cómo se dice…?",
+    "de": "wie sagt man …?",
+    "zh": "……怎么说？",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "¿qué significa…?",
+    "de": "was bedeutet …?",
+    "zh": "……是什么意思？",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "¿cómo se pronuncia…?",
+    "de": "wie spricht man … aus?",
+    "zh": "……怎么发音？",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "¿cómo se escribe…?",
+    "de": "wie schreibt man …?",
+    "zh": "……怎么写？；……怎么拼？",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "sí",
+    "de": "ja",
+    "zh": "是；对",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "la ventana",
+    "de": "das Fenster",
+    "zh": "窗户",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "vale",
+    "de": "einverstanden, ok",
+    "zh": "好的；行",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "puedes",
+    "de": "kannst (du)",
+    "zh": "你能；你可以（poder 的 tú 形式）",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "más alto",
+    "de": "lauter",
+    "zh": "更大声地",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "por favor",
+    "de": "bitte",
+    "zh": "请",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "este/-a",
+    "de": "dieser/-e/-es",
+    "zh": "这个（阳性／阴性）",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "la tarde",
+    "de": "der Nachmittag",
+    "zh": "下午；傍晚",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "estaba pensando",
+    "de": "ich habe gedacht",
+    "zh": "我刚才在想；我当时在想",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "que",
+    "de": "dass",
+    "zh": "（引导从句）……；说是……",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "podríamos",
+    "de": "wir könnten",
+    "zh": "我们可以；我们或许能够（poder 的条件式）",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "ir a",
+    "de": "gehen zu / an / nach",
+    "zh": "去；前往",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "el / la",
+    "de": "der / die",
+    "zh": "定冠词（阳性／阴性单数）",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "la playa",
+    "de": "der Strand",
+    "zh": "海滩",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "más despacio",
+    "de": "langsamer",
+    "zh": "更慢地；慢一点",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "repetir (i)",
+    "de": "wiederholen",
+    "zh": "重复（部分变位中 e → i）",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "en",
+    "de": "in",
+    "zh": "在……里；在……；根据语境也可表示乘坐",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "lo siento",
+    "de": "es tut mir leid",
+    "zh": "对不起；很抱歉",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "no hablo japonés",
+    "de": "ich spreche kein Japanisch",
+    "zh": "我不会说日语",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "gracias",
+    "de": "danke",
+    "zh": "谢谢",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "esto",
+    "de": "das",
+    "zh": "这个（中性指示代词）",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "la página",
+    "de": "die Seite",
+    "zh": "页；页面",
+    "lesson": "spanisch 00",
+    "example": ""
+  },
+  {
+    "es": "la actividad",
+    "de": "die Aktivität",
+    "zh": "活动",
+    "lesson": "spanisch 00",
+    "example": ""
+  }
+]
