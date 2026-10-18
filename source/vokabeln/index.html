@@ -1,38 +1,30 @@
 ---
-layout: false
+title: Vokabeln · 三语生词本
+layout: page
+comments: false
 ---
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Vokabeln · 三语生词本</title>
-  <style>
-    *{box-sizing:border-box}body{margin:0;background:#f6f5f1;color:#25332e;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1080px;margin:auto;padding:40px 24px}a{color:#356b57}header{display:flex;justify-content:space-between;gap:20px;align-items:center}h1{font-size:clamp(32px,6vw,52px);letter-spacing:-2px;margin:30px 0 8px}p{line-height:1.7;color:#65726b}.label{font-size:12px;letter-spacing:2px;color:#65726b}label{display:block;margin:30px 0 10px}input{width:100%;padding:17px 20px;border:1px solid #c7d2ca;border-radius:12px;background:white;color:#25332e;font:inherit}input:focus{outline:3px solid #a5cbb8;outline-offset:2px}.table-wrap{overflow-x:auto;background:white;border:1px solid #dce2db;border-radius:14px}table{border-collapse:collapse;width:100%;text-align:left}th{font-size:13px;color:#52675a;background:#edf1eb}th,td{padding:18px 20px;border-bottom:1px solid #e7ebe5;vertical-align:top}td:first-child{font-weight:600}small{display:block;color:#65726b;font-weight:400;margin-top:8px}#empty{text-align:center;padding:50px 20px}footer{font-size:13px;margin-top:28px;color:#65726b}@media(max-width:600px){main{padding:24px 16px}th,td{padding:14px 12px}header{align-items:flex-start}}
-  </style>
-</head>
-<body><main>
-  <header><span class="label">SPANISCH / 学习笔记</span><a href="/">返回博客</a></header>
-  <h1>Vokabeln</h1>
-  <p>西班牙语 · Deutsch · 中文<br>把新遇到的词放在这里，慢慢积累。</p>
-  <label for="search">搜索单词、释义、课次或例句</label>
-  <input id="search" type="search" placeholder="输入西语、德语或中文…" autocomplete="off" aria-controls="words">
-  <p id="count" role="status" aria-live="polite">正在读取生词…</p>
-  <div class="table-wrap"><table id="words"><thead><tr><th scope="col">Español</th><th scope="col">Deutsch</th><th scope="col">中文</th></tr></thead><tbody id="rows"></tbody></table><div id="empty" hidden></div></div>
-  <footer>支持忽略大小写和重音符号搜索。生词按西班牙语字母排序。</footer>
-</main>
-<script>
-  const input=document.getElementById('search'),rows=document.getElementById('rows'),empty=document.getElementById('empty'),count=document.getElementById('count');
-  let words=[];
-  const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase().replace(/ß/g,'ss');
-  function render(){
-    const terms=normalize(input.value).trim().split(/\s+/).filter(Boolean);
-    const matches=words.filter(word=>terms.every(term=>normalize([word.es,word.de,word.zh,word.lesson,word.example].join(' ')).includes(term)));
-    rows.replaceChildren();
-    for(const word of matches){const row=document.createElement('tr');for(const key of ['es','de','zh']){const cell=document.createElement('td');cell.textContent=word[key]||'—';if(key==='es'){for(const detail of [word.lesson,word.example]){if(detail){const note=document.createElement('small');note.textContent=detail;cell.append(note)}}}row.append(cell)}rows.append(row)}
-    count.textContent=terms.length?`找到 ${matches.length} / ${words.length} 个词条`:`共 ${words.length} 个词条`;
-    empty.hidden=matches.length>0;empty.textContent=words.length?'没有找到匹配的词条，试试其他拼写。':'生词本还是空的，留给你的第一个词。';
-  }
-  input.addEventListener('input',render);
-  fetch('./words.json').then(response=>{if(!response.ok)throw new Error('load');return response.json()}).then(data=>{if(!Array.isArray(data))throw new Error('format');words=data.sort((a,b)=>String(a.es||'').localeCompare(String(b.es||''),'es'));render()}).catch(()=>{count.textContent='暂时无法读取生词';empty.hidden=false;empty.textContent='请刷新重试。'});
-</script></body></html>
+<style>
+.vocab label{display:block;margin:12px 0 4px}.vocab input{box-sizing:border-box;width:100%;padding:10px 12px;background:var(--content-bg-color);color:var(--text-color);border:1px solid #888;border-radius:3px;font:inherit}.vocab input:focus{outline:2px solid #888;outline-offset:2px}.vocab-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.vocab .actions{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}.vocab button,.vocab .file-label{cursor:pointer;font:inherit;background:var(--content-bg-color);color:var(--text-color);border:1px solid #888;border-radius:3px;padding:6px 14px}.vocab .file-label{margin:0}.vocab .hint{font-size:13px;color:#888}.vocab .table-wrap{overflow:auto}.vocab th,.vocab td{min-width:110px;vertical-align:top}.vocab small{display:block;font-weight:normal}.vocab #empty{text-align:center;padding:25px}.vocab .delete{font-size:13px;padding:3px 9px}.vocab summary{cursor:pointer}.vocab #message{min-height:1.6em}.vocab [hidden]{display:none!important}@media(max-width:650px){.vocab-grid{grid-template-columns:1fr;gap:0}}
+</style>
+<section class="vocab" aria-label="三语生词本">
+<p>Español · Deutsch · 中文</p>
+<details open><summary>添加生词</summary>
+<form id="add-word">
+<div class="vocab-grid">
+<div><label for="es">西班牙语</label><input id="es" name="es" required maxlength="200" placeholder="例如：el árbol"></div>
+<div><label for="de">德语</label><input id="de" name="de" required maxlength="200" placeholder="例如：der Baum"></div>
+<div><label for="zh">中文</label><input id="zh" name="zh" required maxlength="200" placeholder="例如：树"></div>
+</div>
+<label for="lesson">课次（选填）</label><input id="lesson" name="lesson" maxlength="200" placeholder="例如：spanisch 00">
+<label for="example">例句（选填）</label><input id="example" name="example" maxlength="1000" placeholder="写一句帮助记忆的话">
+<div class="actions"><button type="submit">添加生词</button></div>
+</form></details>
+<p class="hint">新增词条保存在当前浏览器，不会自动同步到其他设备。建议定期导出备份；换设备时可导入。</p>
+<div class="actions"><button id="export" type="button">导出备份</button><label class="file-label" for="import">导入备份</label><input id="import" type="file" accept=".json,application/json" hidden></div>
+<p id="message" role="status" aria-live="polite"></p>
+<label for="search">查找生词</label><input id="search" type="search" placeholder="输入西语、德语、中文、课次或例句…" aria-controls="words">
+<p id="count" role="status" aria-live="polite">正在读取生词…</p>
+<div class="table-wrap"><table id="words"><thead><tr><th>Español</th><th>Deutsch</th><th>中文</th><th>操作</th></tr></thead><tbody id="rows"></tbody></table><div id="empty" hidden></div></div>
+<p class="hint">按西语字母排序，搜索忽略大小写和重音符号。导入会合并并跳过重复词条。</p>
+</section>
+<script src="/vokabeln/app.js?v=2" defer></script>
