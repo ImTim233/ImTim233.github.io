@@ -3,7 +3,7 @@
   const $ = id => document.getElementById(id);
   const storageKey = 'loshu-vokabeln-v1';
   const fields = ['es', 'de', 'zh', 'lesson', 'example'];
-  let local = [], published = [], undo = null;
+  let local = [], published = [], undo = null, editing = null;
   const normalize = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase().replace(/ß/g, 'ss');
   const identity = word => JSON.stringify(fields.map(key => String(word[key] || '').trim()));
   function validate(data) {
@@ -20,6 +20,13 @@
     });
   }
   function message(text) { $('message').textContent = text; }
+  function resetEditor() {
+    editing = null;
+    $('add-word').reset();
+    $('save-word').textContent = '添加生词';
+    $('editor-title').textContent = '添加生词';
+    $('cancel-edit').hidden = true;
+  }
   function save(next) {
     if (next.length > 10000) { message('最多保存 10000 条生词，请先导出备份并整理词库。'); return false; }
     try { localStorage.setItem(storageKey, JSON.stringify(next)); local = next; render(); return true; }
@@ -44,10 +51,22 @@
       }
       const action = document.createElement('td');
       if (word.source === 'local') {
+        const edit = document.createElement('button'); edit.type = 'button'; edit.className = 'delete'; edit.textContent = '修改'; edit.setAttribute('aria-label', `修改 ${word.es}`);
+        edit.addEventListener('click', () => {
+          editing = identity(word);
+          for (const key of fields) $(key).value = word[key] || '';
+          $('word-editor').open = true;
+          $('save-word').textContent = '保存修改';
+          $('editor-title').textContent = '修改生词';
+          $('cancel-edit').hidden = false;
+          message(`正在修改 ${word.es}。`); $('es').focus();
+        });
+        action.append(edit, ' ');
         const button = document.createElement('button'); button.type = 'button'; button.className = 'delete'; button.textContent = '删除'; button.setAttribute('aria-label', `删除 ${word.es}`);
         button.addEventListener('click', () => {
           const previous = [...local];
           if (save(local.filter(item => identity(item) !== identity(word)))) {
+            if (editing === identity(word)) resetEditor();
             undo = previous; message(`已删除 ${word.es}。`);
             const restore = document.createElement('button'); restore.type = 'button'; restore.textContent = '撤销';
             restore.addEventListener('click', () => { if (undo && save(undo)) { undo = null; message('已恢复词条。'); } });
@@ -68,9 +87,13 @@
     let word;
     try { word = validate([Object.fromEntries(fields.map(key => [key, $(key).value]))])[0]; }
     catch (error) { message(error.message); return; }
-    if (allWords().some(item => identity(item) === identity(word))) { message('这个词条已经在生词本里了。'); return; }
-    if (save([...local, word])) { $('add-word').reset(); $('search').value = ''; render(); message(`已添加 ${word.es}，保存在此浏览器。`); $('es').focus(); }
+    if (editing && !local.some(item => identity(item) === editing)) { message('原词条已不存在，请取消修改后重新添加。'); return; }
+    if (allWords().some(item => identity(item) === identity(word) && identity(item) !== editing)) { message('这个词条已经在生词本里了，请修改内容后再保存。'); return; }
+    const wasEditing = editing !== null;
+    const next = wasEditing ? local.map(item => identity(item) === editing ? word : item) : [...local, word];
+    if (save(next)) { resetEditor(); $('search').value = ''; render(); message(`已${wasEditing ? '修改' : '添加'} ${word.es}，保存在此浏览器。`); $('es').focus(); }
   });
+  $('cancel-edit').addEventListener('click', () => { resetEditor(); message('已取消修改，原词条保持不变。'); });
   $('search').addEventListener('input', render);
   $('export').addEventListener('click', () => {
     const text = $('add-word').querySelector('button').disabled ? (localStorage.getItem(storageKey) || '[]') : JSON.stringify(allWords().map(word => Object.fromEntries(fields.map(key => [key, word[key] || '']))), null, 2);
