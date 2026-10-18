@@ -1,0 +1,6 @@
+# Use the installed NexT theme, keeping the original Muse appearance.
+scheme: Muse
+menu:
+  home: / || fa fa-home
+  archives: /archives/ || fa fa-archive
+  生词本: /vokabeln/ || fa fa-book
